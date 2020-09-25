@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> BMI </title>
+	<script type="text/javascript" src="vue.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+
+	<div id="app">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-2">
+
+					<label for="height"> Your Height: </label><br>
+
+					<label for="feet"> Feet: </label>
+					<div><input v-model="feet" id="feet" type="text" class="form-control">
+					</div>
+
+					<label for="inches"> Inches: </label>
+					<div><input v-model="inches" id="inches" type="text" class="form-control">
+					</div>
+
+					<label for="weight"> Your Weight: (in lb) </label>
+					<div><input v-model="weight" id="weight" type="text" class="form-control">
+					</div>
+
+					<button v-on:click="calculate">Compute BMI</button>
+				</div>
+			</div>
+		</div>
+
+		<h2>Your BMI: {{bmi}} </h2>
+	</div>
+
+	<script type="text/javascript">
+		var app = new Vue({
+			el:"#app",
+			data:{
+				feet: null,
+				inches: null,
+				weight: null
+			}
+
+			computed:{
+				calculate(){
+					var feet = parseInt(this.feet)*12;
+					var inches = parseInt(this.inches);
+					var height = feet+inches
+					var weight = parseInt(this.weight);
+
+					var bmi = 730 * weight/ (height*height);
+
+					if(bmi < 18.5){
+						return 'Underweight';
+					}
+					else if( 18.5 < bmi  && bmi < 24.5 ){
+						return 'Normal Weight';
+					}
+					else if( 25 < bmi && bmi < 29.9 ){
+						return 'Over Weight';
+					}
+					else if(bmi >= 30){
+						return 'Obesity';
+					}
+				}
+
+			}
+		})
+
+
+	</script>
+</body>
+</html>
+
+
+

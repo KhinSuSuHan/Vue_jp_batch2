@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue js Introduction</title>
+  <script type="text/javascript" src="vue.min.js"></script>
+</head>
+<body>
+
+  <div id="app">
+
+    <h1>{{message}}</h1>
+    <button v-on:click="reverse">Reverse Text</button>  <!--  reverse method -->
+    <br>
+
+    <p v-bind:title="titletxt">{{name}}</p> 
+    <!-- Long form -->
+
+    <!--(v-model)search in data and found name='Vue In-browser' (link with data)-->
+    <input type="text" name="name" placeholder="Enter your name" v-model="name"> 
+
+    <img :src="photo" alt="This is sample image!" width="200">
+    <!-- Short form -->
+
+    <!-- check condition -->
+    <p v-if="mark > 50">Passed!</p>
+    <p v-else>Failed!</p>
+
+    <!-- looping -->
+    <ol>
+      <li v-for="todo in filterTodos">{{todo.text}}</li>
+    </ol>
+
+  </div>
+  
+  <script type="text/javascript">
+
+    var app = new Vue({ // instance (object)
+      el:"#app", // DOM link
+
+      //properties(var-name) of app obj 
+      data:{
+        message: "Hello Vue",
+        name: "Vue In-browser",
+        titletxt: "This is a title",
+        photo: "photo/xiaozhan.jpeg",
+        mark: 60,
+        todos: [
+          { text: 'Learn JavaScript', status: false },
+          { text: 'Learn Vue', status: false },
+          { text: 'Build something awesome', status: true }
+        ]
+      },
+
+      methods:{
+        reverse(){
+          this.message = this.message.split('').reverse().join('');
+        }
+      },
+
+      //functions (want to add divide (filter)between user when showing result) 
+      computed:{
+        filterTodos(){
+          return this.todos.filter(todo => todo.status==false)
+        }
+      }
+    })
+  </script>
+</body>
+</html>
